@@ -44,9 +44,8 @@
           background:rgba(255,248,248,.86); backdrop-filter:blur(14px) saturate(1.1);
           border-bottom:1px solid var(--hair)}
   .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:18px; padding-bottom:18px}
-  .sig{display:inline-flex; align-items:baseline; gap:12px}
-  .sig .tt{font:italic 600 26px/1 Cormorant,Georgia,serif; color:var(--green-dd)}
-  .sig .nm{font:600 13px/1 Cormorant,Georgia,serif; text-transform:uppercase; letter-spacing:.26em; color:var(--ink)}
+  .sig{display:inline-flex; align-items:baseline}
+  .sig .nm{font:600 15px/1 Cormorant,Georgia,serif; text-transform:uppercase; letter-spacing:.26em; color:var(--ink)}
   .tg{display:inline-flex; align-items:center; gap:10px; text-decoration:none; background:var(--green); color:#fff;
       font:700 12px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em;
       padding:14px 24px; border-radius:999px; box-shadow:0 8px 20px -12px rgba(46,113,80,.8);
@@ -73,18 +72,6 @@
     content:"Талисман"; position:absolute; right:-18px; bottom:-26px; pointer-events:none;
     font:italic 500 130px/1 Cormorant,Georgia,serif; color:#fff; opacity:.05; letter-spacing:-.03em;
   }
-  .kicker{position:relative; z-index:1; font:500 11px/1 "JetBrains Mono",ui-monospace,monospace;
-          text-transform:uppercase; letter-spacing:.22em; color:var(--mint)}
-  .feature h1{
-    position:relative; z-index:1; margin:0;
-    font:500 clamp(36px,3.6vw,52px)/1.06 Cormorant,Georgia,serif; letter-spacing:-.02em; color:var(--paper);
-    text-wrap:balance;
-  }
-  .feature h1 em{font-style:italic; color:#fff; position:relative; white-space:nowrap}
-  .feature h1 em::after{content:""; position:absolute; left:0; right:0; bottom:.04em; height:3px; background:var(--green);
-    transform:scaleX(0); transform-origin:left; animation:draw .8s var(--ease) .5s forwards}
-  @keyframes draw{to{transform:scaleX(1)}}
-  .feature p{position:relative; z-index:1; margin:0; color:#BBCFC2; font-size:17px; max-width:44ch}
 
   /* ── разделитель с литерой Т ──────────── */
   .sep{display:flex; align-items:center; gap:22px; margin:72px 0 40px}
@@ -101,12 +88,6 @@
   .thumb img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .52s var(--ease), filter .32s var(--ease)}
   .card:hover .thumb img,.feature:hover .thumb img{transform:scale(1.035)}
   .thumb::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(11,32,23,0) 52%,rgba(11,32,23,.5) 100%)}
-  .tag{
-    position:absolute; z-index:2; left:16px; top:16px;
-    font:500 10px/1 "JetBrains Mono",ui-monospace,monospace; text-transform:uppercase; letter-spacing:.2em;
-    color:var(--paper); background:rgba(11,32,23,.55); border:1px solid rgba(244,239,233,.16);
-    padding:8px 11px; border-radius:6px; backdrop-filter:blur(8px);
-  }
   .play{
     position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%) scale(.94);
     width:70px; height:70px; border-radius:999px; background:rgba(255,248,248,.9);
@@ -117,24 +98,13 @@
   .play i{display:block; width:0; height:0; margin-left:5px;
     border-left:18px solid var(--green-dd); border-top:12px solid transparent; border-bottom:12px solid transparent}
 
+  .card h2 a,.feature h1 a{text-decoration:none; color:inherit}
   .card h2{margin:0; font:600 30px/1.1 Cormorant,Georgia,serif; letter-spacing:-.01em; color:var(--ink); text-wrap:balance}
   .card h2 em{font-style:italic; color:var(--green-dd); position:relative}
   .card h2 em::after{content:""; position:absolute; left:0; right:0; bottom:.02em; height:2px; background:var(--green);
     transform:scaleX(0); transform-origin:left; transition:transform .42s var(--ease)}
   .card:hover h2 em::after{transform:scaleX(1)}
   .card p{margin:0; font-size:16px; line-height:1.52; color:var(--ink-3); max-width:48ch}
-  .watch{
-    align-self:flex-start; margin-top:4px;
-    display:inline-flex; align-items:center; gap:10px; text-decoration:none;
-    font:700 12px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.16em; color:var(--green-dd);
-    padding:14px 26px; border-radius:999px; border:1px solid var(--green);
-    transition:background .24s var(--ease), color .24s var(--ease)
-  }
-  .watch:hover{background:var(--green); color:#fff}
-  .watch i{display:inline-block; font-style:normal; transition:transform .24s var(--ease)}
-  .watch:hover i{transform:translateX(5px)}
-  .fbody .watch{align-self:flex-start; color:#fff; background:var(--green); border-color:var(--green); margin-top:8px}
-  .fbody .watch:hover{background:var(--green-d); border-color:var(--green-d)}
 
   /* ── подвал ───────────────────────────── */
   footer{background:var(--band); border-top:1px solid var(--hair)}
@@ -173,12 +143,25 @@
     .feature h1 em::after,.card h2 em::after{transform:scaleX(1)}
   }
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=112722856', 'ym');
+
+    ym(112722856, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112722856" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
 <div class="topbar">
   <div class="wrap">
-    <div class="sig"><span class="tt">Т</span><span class="nm">Талисман</span></div>
+    <div class="sig"><span class="nm">Талисман</span></div>
     <a class="tg" href="https://t.me/talismanmisha" target="_blank" rel="noopener">Telegram-канал <i>&#8594;</i></a>
   </div>
 </div>
@@ -187,16 +170,13 @@
   <div class="wrap">
 
     <article class="feature rise d1">
-      <a class="thumb" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">
+      <a class="thumb" data-v="antivoronka" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">
         <img src="thumbs/01.jpg" alt="Как делать контент, который приводит покупателей, а не зрителей">
-        <span class="tag">Контент</span>
         <span class="play"><i></i></span>
       </a>
       <div class="fbody">
-        <div class="kicker">Смотреть первым</div>
-        <h1>Как делать контент, который приводит <em>покупателей</em>, а не зрителей</h1>
+        <h1><a href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener" data-v="antivoronka">Как делать контент, который приводит <em>покупателей</em>, а не зрителей</a></h1>
         <p>Почему просмотры не равны деньгам и что менять в контенте, чтобы приходили те, кто платит.</p>
-        <a class="watch" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </div>
     </article>
 
@@ -205,47 +185,39 @@
     <div class="grid">
 
       <article class="card rise d2">
-        <a class="thumb" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">
+        <a class="thumb" data-v="arhivny-kontent" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">
           <img src="thumbs/02.jpg" alt="3 млн на архивном контенте — контент-завод на Claude Code" loading="lazy">
-          <span class="tag">Контент-завод</span>
           <span class="play"><i></i></span>
         </a>
-        <h2>3 млн на <em>архивном</em> контенте</h2>
+        <h2><a href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener" data-v="arhivny-kontent">3 млн на <em>архивном</em> контенте</a></h2>
         <p>РАБОЧИЙ контент-завод на Claude Code для инфобизнеса: как старые записи превращаются в поток материалов.</p>
-        <a class="watch" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
       <article class="card rise d3">
-        <a class="thumb" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">
+        <a class="thumb" data-v="infobutik" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">
           <img src="thumbs/03.jpg" alt="Модель инфобутика — 70 млн в год на онлайн-школе" loading="lazy">
-          <span class="tag">Модель</span>
           <span class="play"><i></i></span>
         </a>
-        <h2>Модель <em>инфобутика</em></h2>
+        <h2><a href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener" data-v="infobutik">Модель <em>инфобутика</em></a></h2>
         <p>Как эксперту делать 70 млн в год на онлайн-школе: маленькая аудитория, высокая маржа, верные люди.</p>
-        <a class="watch" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
       <article class="card rise d4">
-        <a class="thumb" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">
+        <a class="thumb" data-v="net-voronok" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">
           <img src="thumbs/04.jpg" alt="Нет никаких воронок, это всё враньё" loading="lazy">
-          <span class="tag">Воронки</span>
           <span class="play"><i></i></span>
         </a>
-        <h2>Нет никаких <em>воронок</em>, это всё враньё</h2>
+        <h2><a href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener" data-v="net-voronok">Нет никаких <em>воронок</em>, это всё враньё</a></h2>
         <p>Что стоит за красивыми схемами из курсов по маркетингу и что работает вместо них.</p>
-        <a class="watch" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
       <article class="card rise d5">
-        <a class="thumb" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">
+        <a class="thumb" data-v="mentorstvo-500k" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">
           <img src="thumbs/05.jpg" alt="500к в месяц на наставничестве с микроблогом в 2026" loading="lazy">
-          <span class="tag">Менторство</span>
           <span class="play"><i></i></span>
         </a>
-        <h2>500к/мес на наставничестве с <em>микроблогом</em></h2>
+        <h2><a href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener" data-v="mentorstvo-500k">500к/мес на наставничестве с <em>микроблогом</em></a></h2>
         <p>Запуск менторства в 2026: сколько нужно подписчиков на самом деле и из чего складывается доход.</p>
-        <a class="watch" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
     </div>
@@ -263,5 +235,21 @@
   </div>
 </footer>
 
+
+<script>
+  // цели Метрики: клик по видео, телеграму, ютубу
+  (function(){
+    var ID = 112722856;
+    function goal(name, params){ if (window.ym) { try { ym(ID, 'reachGoal', name, params || {}); } catch(e){} } }
+    document.addEventListener('click', function(e){
+      var v = e.target.closest('[data-v]');
+      if (v) { goal('watch_' + v.dataset.v, {slug: v.dataset.v}); return; }
+      var a = e.target.closest('a[href]');
+      if (!a) return;
+      if (a.href.indexOf('t.me/') > -1) goal('telegram_click');
+      else if (a.href.indexOf('youtube.com/@') > -1) goal('youtube_channel_click');
+    }, true);
+  })();
+</script>
 </body>
 </html>
