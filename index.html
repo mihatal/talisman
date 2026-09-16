@@ -9,97 +9,168 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
-    --green:#4BA776; --green-d:#3B8C61; --green-dd:#2E7150;
-    --cream:#FFF8F8; --card:#FFFCFB; --band:#F7EEE9; --hair:#E4D7CD;
+    --green:#4BA776; --green-d:#3B8C61; --green-dd:#2E7150; --green-pale:#EFF6F1;
+    --cream:#FFF8F8; --card:#FFFCFB; --band:#F7EEE9; --inset:#EFE3DB; --hair:#E4D7CD;
     --ink:#13241B; --ink-2:#2C382F; --ink-3:#4C564D; --mute:#877C72;
-    --forest:#102A1F; --forest-s:#16382A; --mint:#84C2A1; --paper:#F4EFE9;
+    --forest:#102A1F; --forest-s:#16382A; --forest-e:#29503D; --mint:#84C2A1; --paper:#F4EFE9;
     --ease:cubic-bezier(.22,.68,.18,1);
     --maxw:1240px;
   }
   *{box-sizing:border-box}
   html,body{margin:0;padding:0}
   body{
-    background:var(--cream); color:var(--ink-2);
+    background:var(--cream);
+    background-image:linear-gradient(180deg,#FFFFFF 0%,var(--cream) 340px,var(--cream) 100%);
+    color:var(--ink-2);
     font:400 18px/1.58 Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
     -webkit-font-smoothing:antialiased;
     padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
   }
-  /* зерно бумаги */
-  body::before{
-    content:""; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.035;
+  body::before{ /* зерно бумаги */
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.04;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
   }
   .wrap{position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 24px}
-  .over{font:500 12px/1 "JetBrains Mono",ui-monospace,monospace; text-transform:uppercase; letter-spacing:.2em; color:var(--mute)}
+  a{color:inherit}
+  :focus-visible{outline:2px solid var(--green); outline-offset:3px; border-radius:4px}
+
+  /* появление — от видимого покоя, один заход при загрузке */
+  .rise{animation:rise .62s var(--ease) both}
+  @keyframes rise{from{opacity:0; transform:translateY(14px)} to{opacity:1; transform:none}}
+  .d1{animation-delay:.05s}.d2{animation-delay:.12s}.d3{animation-delay:.19s}.d4{animation-delay:.26s}.d5{animation-delay:.33s}
 
   /* ── верхняя строка ───────────────────── */
-  .topbar{border-bottom:1px solid var(--hair); background:var(--cream)}
-  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding-top:22px; padding-bottom:22px}
-  .sig{font:600 13px/1 Cormorant,Georgia,serif; text-transform:uppercase; letter-spacing:.26em; color:var(--ink)}
+  .topbar{position:sticky; top:env(safe-area-inset-top,0px); z-index:20;
+          background:rgba(255,248,248,.86); backdrop-filter:blur(14px) saturate(1.1);
+          border-bottom:1px solid var(--hair)}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:18px; padding-bottom:18px}
+  .sig{display:inline-flex; align-items:baseline; gap:12px}
+  .sig .tt{font:italic 600 26px/1 Cormorant,Georgia,serif; color:var(--green-dd)}
+  .sig .nm{font:600 13px/1 Cormorant,Georgia,serif; text-transform:uppercase; letter-spacing:.26em; color:var(--ink)}
   .tg{display:inline-flex; align-items:center; gap:10px; text-decoration:none; background:var(--green); color:#fff;
-      font:700 13px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em;
-      padding:14px 24px; border-radius:999px; transition:background .24s var(--ease)}
-  .tg:hover{background:var(--green-d)}
-  .tg span{display:inline-block; transition:transform .24s var(--ease)}
-  .tg:hover span{transform:translateX(5px)}
+      font:700 12px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em;
+      padding:14px 24px; border-radius:999px; box-shadow:0 8px 20px -12px rgba(46,113,80,.8);
+      transition:background .24s var(--ease), box-shadow .24s var(--ease)}
+  .tg:hover{background:var(--green-d); box-shadow:0 12px 26px -12px rgba(46,113,80,.9)}
+  .tg i{display:inline-block; transition:transform .24s var(--ease); font-style:normal}
+  .tg:hover i{transform:translateX(5px)}
+
+  /* ── главный ролик ────────────────────── */
+  main{padding:52px 0 0}
+  .feature{
+    position:relative; overflow:hidden; border-radius:16px;
+    background:var(--forest);
+    background-image:radial-gradient(120% 130% at 8% 0%, #16382A 0%, #102A1F 58%, #0B2017 100%);
+    display:grid; grid-template-columns:1.12fr .88fr; align-items:stretch;
+    box-shadow:0 40px 80px -56px rgba(11,32,23,.75);
+  }
+  .feature .thumb{border-radius:0; aspect-ratio:auto; width:100%; height:100%; min-height:440px; box-shadow:none;
+                  background:#0B2017; padding:26px; border-right:1px solid rgba(41,80,61,.6)}
+  .feature .thumb img{object-fit:contain; border-radius:8px}
+  .feature .thumb::after{inset:26px; border-radius:8px}
+  .feature .fbody{padding:52px 52px 48px; display:flex; flex-direction:column; gap:20px; justify-content:center; position:relative}
+  .feature .fbody::before{ /* бледный водяной знак */
+    content:"Талисман"; position:absolute; right:-18px; bottom:-26px; pointer-events:none;
+    font:italic 500 130px/1 Cormorant,Georgia,serif; color:#fff; opacity:.05; letter-spacing:-.03em;
+  }
+  .kicker{position:relative; z-index:1; font:500 11px/1 "JetBrains Mono",ui-monospace,monospace;
+          text-transform:uppercase; letter-spacing:.22em; color:var(--mint)}
+  .feature h1{
+    position:relative; z-index:1; margin:0;
+    font:500 clamp(36px,3.6vw,52px)/1.06 Cormorant,Georgia,serif; letter-spacing:-.02em; color:var(--paper);
+    text-wrap:balance;
+  }
+  .feature h1 em{font-style:italic; color:#fff; position:relative; white-space:nowrap}
+  .feature h1 em::after{content:""; position:absolute; left:0; right:0; bottom:.04em; height:3px; background:var(--green);
+    transform:scaleX(0); transform-origin:left; animation:draw .8s var(--ease) .5s forwards}
+  @keyframes draw{to{transform:scaleX(1)}}
+  .feature p{position:relative; z-index:1; margin:0; color:#BBCFC2; font-size:17px; max-width:44ch}
+
+  /* ── разделитель с литерой Т ──────────── */
+  .sep{display:flex; align-items:center; gap:22px; margin:72px 0 40px}
+  .sep span{flex:1; height:1px; background:var(--hair)}
+  .sep b{font:italic 500 30px/1 Cormorant,Georgia,serif; color:var(--green); font-weight:500}
 
   /* ── сетка ────────────────────────────── */
-  main{padding:56px 0 96px}
-  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:32px}
-  .sec-head .line{flex:1; height:1px; background:var(--hair)}
-  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:40px 32px}
-
-  .card{
-    background:var(--card); border-radius:16px; overflow:hidden;
-    border:1px solid var(--hair);
-    display:flex; flex-direction:column;
-    transition:transform .24s var(--ease), box-shadow .24s var(--ease);
-    box-shadow:0 1px 2px rgba(19,36,27,.03);
+  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:56px 40px; padding-bottom:104px}
+  .card{display:flex; flex-direction:column; gap:18px}
+  .thumb{
+    position:relative; display:block; aspect-ratio:16/9; overflow:hidden; border-radius:12px;
+    background:var(--inset); box-shadow:0 20px 44px -34px rgba(19,36,27,.7);
   }
-  .card:hover{transform:translateY(-3px); box-shadow:0 18px 40px -22px rgba(19,36,27,.35)}
-  .card .top{height:3px; background:var(--green)}
-  .thumb{position:relative; display:block; aspect-ratio:16/9; background:var(--band); overflow:hidden}
-  .thumb img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .42s var(--ease)}
-  .card:hover .thumb img{transform:scale(1.03)}
-  .thumb::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(16,42,31,0) 45%,rgba(16,42,31,.55) 100%)}
+  .thumb img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .52s var(--ease), filter .32s var(--ease)}
+  .card:hover .thumb img,.feature:hover .thumb img{transform:scale(1.035)}
+  .thumb::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(11,32,23,0) 52%,rgba(11,32,23,.5) 100%)}
+  .tag{
+    position:absolute; z-index:2; left:16px; top:16px;
+    font:500 10px/1 "JetBrains Mono",ui-monospace,monospace; text-transform:uppercase; letter-spacing:.2em;
+    color:var(--paper); background:rgba(11,32,23,.55); border:1px solid rgba(244,239,233,.16);
+    padding:8px 11px; border-radius:6px; backdrop-filter:blur(8px);
+  }
   .play{
-    position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%);
-    width:64px; height:64px; border-radius:999px; background:rgba(255,248,248,.92);
-    display:grid; place-items:center; transition:background .24s var(--ease), transform .24s var(--ease);
+    position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%) scale(.94);
+    width:70px; height:70px; border-radius:999px; background:rgba(255,248,248,.9);
+    display:grid; place-items:center; opacity:.92;
+    transition:transform .3s var(--ease), background .24s var(--ease), opacity .24s var(--ease);
   }
-  .card:hover .play{background:#fff; transform:translate(-50%,-50%) scale(1.06)}
-  .play i{display:block; width:0; height:0; margin-left:4px; border-left:17px solid var(--green-dd); border-top:11px solid transparent; border-bottom:11px solid transparent}
-  .num{position:absolute; z-index:2; left:14px; top:14px; font:500 12px/1 "JetBrains Mono",monospace; letter-spacing:.14em; color:var(--paper); background:rgba(16,42,31,.62); padding:7px 10px; border-radius:6px; backdrop-filter:blur(6px)}
+  .card:hover .play,.feature:hover .play{background:#fff; opacity:1; transform:translate(-50%,-50%) scale(1.04)}
+  .play i{display:block; width:0; height:0; margin-left:5px;
+    border-left:18px solid var(--green-dd); border-top:12px solid transparent; border-bottom:12px solid transparent}
 
-  .body{padding:22px 24px 26px; display:flex; flex-direction:column; flex:1; gap:12px}
-  .t{font:600 27px/1.12 Cormorant,Georgia,serif; letter-spacing:-.01em; color:var(--ink); margin:0}
-  .t em{font-style:italic; color:var(--green-dd)}
-  .sub{margin:0; font-size:15px; line-height:1.5; color:var(--ink-3)}
-  .btn{
-    margin-top:auto; align-self:flex-start; display:inline-flex; align-items:center; gap:10px;
-    background:var(--green); color:#fff; text-decoration:none;
-    font:700 13px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em;
-    padding:15px 26px; border-radius:999px;
-    transition:background .24s var(--ease);
+  .card h2{margin:0; font:600 30px/1.1 Cormorant,Georgia,serif; letter-spacing:-.01em; color:var(--ink); text-wrap:balance}
+  .card h2 em{font-style:italic; color:var(--green-dd); position:relative}
+  .card h2 em::after{content:""; position:absolute; left:0; right:0; bottom:.02em; height:2px; background:var(--green);
+    transform:scaleX(0); transform-origin:left; transition:transform .42s var(--ease)}
+  .card:hover h2 em::after{transform:scaleX(1)}
+  .card p{margin:0; font-size:16px; line-height:1.52; color:var(--ink-3); max-width:48ch}
+  .watch{
+    align-self:flex-start; margin-top:4px;
+    display:inline-flex; align-items:center; gap:10px; text-decoration:none;
+    font:700 12px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.16em; color:var(--green-dd);
+    padding:14px 26px; border-radius:999px; border:1px solid var(--green);
+    transition:background .24s var(--ease), color .24s var(--ease)
   }
-  .btn:hover{background:var(--green-d)}
-  .btn span{display:inline-block; transition:transform .24s var(--ease)}
-  .btn:hover span{transform:translateX(5px)}
+  .watch:hover{background:var(--green); color:#fff}
+  .watch i{display:inline-block; font-style:normal; transition:transform .24s var(--ease)}
+  .watch:hover i{transform:translateX(5px)}
+  .fbody .watch{align-self:flex-start; color:#fff; background:var(--green); border-color:var(--green); margin-top:8px}
+  .fbody .watch:hover{background:var(--green-d); border-color:var(--green-d)}
 
   /* ── подвал ───────────────────────────── */
   footer{background:var(--band); border-top:1px solid var(--hair)}
-  footer .wrap{padding:44px 24px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap}
-  .chan{display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--green-dd); font:700 13px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em; border:1px solid var(--green); padding:14px 24px; border-radius:999px; transition:background .24s var(--ease), color .24s var(--ease)}
-  .chan:hover{background:var(--green); color:#fff}
+  footer .wrap{padding:72px 24px 80px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:26px}
+  footer h3{margin:0; font:500 clamp(30px,3.4vw,44px)/1.1 Cormorant,Georgia,serif; letter-spacing:-.02em; color:var(--ink); max-width:18ch}
+  footer h3 em{font-style:italic; color:var(--green-dd)}
+  .actions{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
+  .ghost{display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--ink);
+    font:700 12px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em;
+    padding:16px 28px; border-radius:999px; border:1px solid var(--hair); background:var(--card);
+    transition:border-color .24s var(--ease), color .24s var(--ease)}
+  .ghost:hover{border-color:var(--green); color:var(--green-dd)}
+  .footsig{font:600 12px/1 Cormorant,Georgia,serif; text-transform:uppercase; letter-spacing:.26em; color:var(--mute)}
 
+  @media (max-width:900px){
+    .feature{grid-template-columns:1fr}
+    .feature .thumb{aspect-ratio:16/9; min-height:0; padding:0; border-right:0}
+    .feature .thumb img{object-fit:cover; border-radius:0}
+    .feature .thumb::after{inset:0; border-radius:0}
+    .feature .fbody{padding:34px 28px 36px}
+    .feature .fbody::before{font-size:96px; right:-10px; bottom:-18px}
+    .grid{grid-template-columns:1fr; gap:44px}
+  }
   @media (max-width:640px){
     body{font-size:17px}
-    main{padding:40px 0 72px}
-    .grid{grid-template-columns:1fr; gap:28px}
-    .t{font-size:24px}
+    main{padding:32px 0 0}
+    .sep{margin:52px 0 32px}
+    .grid{padding-bottom:72px}
+    .card h2{font-size:26px}
+    .topbar .wrap{padding-top:14px; padding-bottom:14px}
+    .tg{padding:12px 18px; letter-spacing:.1em}
+    footer .wrap{padding:56px 24px 64px}
   }
   @media (prefers-reduced-motion:reduce){
     *{animation:none !important; transition:none !important}
+    .feature h1 em::after,.card h2 em::after{transform:scaleX(1)}
   }
 </style>
 </head>
@@ -107,88 +178,74 @@
 
 <div class="topbar">
   <div class="wrap">
-    <div class="sig">Т А Л И С М А Н</div>
-    <a class="tg" href="https://t.me/talismanmisha" target="_blank" rel="noopener">Telegram-канал <span>&#8594;</span></a>
+    <div class="sig"><span class="tt">Т</span><span class="nm">Талисман</span></div>
+    <a class="tg" href="https://t.me/talismanmisha" target="_blank" rel="noopener">Telegram-канал <i>&#8594;</i></a>
   </div>
 </div>
 
 <main>
   <div class="wrap">
-    <div class="sec-head">
-      <div class="over">Смотреть</div>
-      <div class="line"></div>
-    </div>
+
+    <article class="feature rise d1">
+      <a class="thumb" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">
+        <img src="thumbs/01.jpg" alt="Как делать контент, который приводит покупателей, а не зрителей">
+        <span class="tag">Контент</span>
+        <span class="play"><i></i></span>
+      </a>
+      <div class="fbody">
+        <div class="kicker">Смотреть первым</div>
+        <h1>Как делать контент, который приводит <em>покупателей</em>, а не зрителей</h1>
+        <p>Почему просмотры не равны деньгам и что менять в контенте, чтобы приходили те, кто платит.</p>
+        <a class="watch" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
+      </div>
+    </article>
+
+    <div class="sep"><span></span><b>Т</b><span></span></div>
 
     <div class="grid">
 
-      <article class="card">
-        <div class="top"></div>
-        <a class="thumb" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">
-          <img src="thumbs/01.jpg" alt="Как делать контент, который приводит покупателей, а не зрителей" loading="lazy">
-          <span class="num">01</span>
-          <span class="play"><i></i></span>
-        </a>
-        <div class="body">
-          <h2 class="t">Как делать контент, который приводит <em>покупателей</em>, а не зрителей</h2>
-          <p class="sub">Почему просмотры не равны деньгам и что менять в контенте, чтобы приходили те, кто платит.</p>
-          <a class="btn" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">Смотреть <span>→</span></a>
-        </div>
-      </article>
-
-      <article class="card">
-        <div class="top"></div>
+      <article class="card rise d2">
         <a class="thumb" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">
-          <img src="thumbs/02.jpg" alt="3млн на архивном контенте — контент-завод на Claude Code" loading="lazy">
-          <span class="num">02</span>
+          <img src="thumbs/02.jpg" alt="3 млн на архивном контенте — контент-завод на Claude Code" loading="lazy">
+          <span class="tag">Контент-завод</span>
           <span class="play"><i></i></span>
         </a>
-        <div class="body">
-          <h2 class="t">3 млн на <em>архивном</em> контенте</h2>
-          <p class="sub">РАБОЧИЙ контент-завод на Claude Code для инфобизнеса: как старые записи превращаются в поток материалов.</p>
-          <a class="btn" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">Смотреть <span>→</span></a>
-        </div>
+        <h2>3 млн на <em>архивном</em> контенте</h2>
+        <p>РАБОЧИЙ контент-завод на Claude Code для инфобизнеса: как старые записи превращаются в поток материалов.</p>
+        <a class="watch" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
-      <article class="card">
-        <div class="top"></div>
+      <article class="card rise d3">
         <a class="thumb" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">
           <img src="thumbs/03.jpg" alt="Модель инфобутика — 70 млн в год на онлайн-школе" loading="lazy">
-          <span class="num">03</span>
+          <span class="tag">Модель</span>
           <span class="play"><i></i></span>
         </a>
-        <div class="body">
-          <h2 class="t">Модель <em>инфобутика</em></h2>
-          <p class="sub">Как эксперту делать 70 млн в год на онлайн-школе: маленькая аудитория, высокая маржа, верные люди.</p>
-          <a class="btn" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">Смотреть <span>→</span></a>
-        </div>
+        <h2>Модель <em>инфобутика</em></h2>
+        <p>Как эксперту делать 70 млн в год на онлайн-школе: маленькая аудитория, высокая маржа, верные люди.</p>
+        <a class="watch" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
-      <article class="card">
-        <div class="top"></div>
+      <article class="card rise d4">
         <a class="thumb" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">
           <img src="thumbs/04.jpg" alt="Нет никаких воронок, это всё враньё" loading="lazy">
-          <span class="num">04</span>
+          <span class="tag">Воронки</span>
           <span class="play"><i></i></span>
         </a>
-        <div class="body">
-          <h2 class="t">Нет никаких <em>воронок</em>, это всё враньё</h2>
-          <p class="sub">Что стоит за красивыми схемами из курсов по маркетингу и что работает вместо них.</p>
-          <a class="btn" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">Смотреть <span>→</span></a>
-        </div>
+        <h2>Нет никаких <em>воронок</em>, это всё враньё</h2>
+        <p>Что стоит за красивыми схемами из курсов по маркетингу и что работает вместо них.</p>
+        <a class="watch" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
-      <article class="card">
-        <div class="top"></div>
+      <article class="card rise d5">
         <a class="thumb" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">
           <img src="thumbs/05.jpg" alt="500к в месяц на наставничестве с микроблогом в 2026" loading="lazy">
-          <span class="num">05</span>
+          <span class="tag">Менторство</span>
           <span class="play"><i></i></span>
         </a>
-        <div class="body">
-          <h2 class="t">500к/мес на наставничестве с <em>микроблогом</em></h2>
-          <p class="sub">Запуск менторства в 2026: сколько нужно подписчиков на самом деле и из чего складывается доход.</p>
-          <a class="btn" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">Смотреть <span>→</span></a>
-        </div>
+        <h2>500к/мес на наставничестве с <em>микроблогом</em></h2>
+        <p>Запуск менторства в 2026: сколько нужно подписчиков на самом деле и из чего складывается доход.</p>
+        <a class="watch" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">Смотреть <i>&#8594;</i></a>
       </article>
 
     </div>
@@ -197,8 +254,12 @@
 
 <footer>
   <div class="wrap">
-    <div class="sig">Т А Л И С М А Н</div>
-    <a class="chan" href="https://www.youtube.com/@talismanmishaa" target="_blank" rel="noopener">Канал на YouTube <span>→</span></a>
+    <h3>Новые видео и разборы — <em>в канале</em></h3>
+    <div class="actions">
+      <a class="tg" href="https://t.me/talismanmisha" target="_blank" rel="noopener">Telegram-канал <i>&#8594;</i></a>
+      <a class="ghost" href="https://www.youtube.com/@talismanmishaa" target="_blank" rel="noopener">YouTube <i>&#8594;</i></a>
+    </div>
+    <div class="footsig">Т А Л И С М А Н</div>
   </div>
 </footer>
 
