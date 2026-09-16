@@ -72,6 +72,17 @@
     content:"Талисман"; position:absolute; right:-18px; bottom:-26px; pointer-events:none;
     font:italic 500 130px/1 Cormorant,Georgia,serif; color:#fff; opacity:.05; letter-spacing:-.03em;
   }
+  .feature h1{
+    position:relative; z-index:1; margin:0;
+    font:500 clamp(36px,3.6vw,52px)/1.06 Cormorant,Georgia,serif; letter-spacing:-.02em; color:var(--paper);
+    text-wrap:balance;
+  }
+  .feature h1 em{font-style:italic; color:#fff; position:relative; white-space:nowrap}
+  .feature h1 em::after{content:""; position:absolute; left:0; right:0; bottom:.04em; height:3px; background:var(--green);
+    transform:scaleX(0); transform-origin:left; animation:draw .8s var(--ease) .5s forwards}
+  @keyframes draw{to{transform:scaleX(1)}}
+  .feature p{position:relative; z-index:1; margin:0; color:#C2D4C8; font-size:17px; max-width:44ch}
+  .feature h1 a:hover em::after{background:var(--mint)}
 
   /* ── разделитель с литерой Т ──────────── */
   .sep{display:flex; align-items:center; gap:22px; margin:72px 0 40px}
