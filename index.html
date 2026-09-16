@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Миша Талисман — Видео</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#4BA776; --green-d:#3B8C61; --green-dd:#2E7150;
+    --cream:#FFF8F8; --card:#FFFCFB; --band:#F7EEE9; --hair:#E4D7CD;
+    --ink:#13241B; --ink-2:#2C382F; --ink-3:#4C564D; --mute:#877C72;
+    --forest:#102A1F; --forest-s:#16382A; --mint:#84C2A1; --paper:#F4EFE9;
+    --ease:cubic-bezier(.22,.68,.18,1);
+    --maxw:1240px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--cream); color:var(--ink-2);
+    font:400 18px/1.58 Manrope,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    -webkit-font-smoothing:antialiased;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  /* зерно бумаги */
+  body::before{
+    content:""; position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.035;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>");
+  }
+  .wrap{position:relative; z-index:1; max-width:var(--maxw); margin:0 auto; padding:0 24px}
+  .over{font:500 12px/1 "JetBrains Mono",ui-monospace,monospace; text-transform:uppercase; letter-spacing:.2em; color:var(--mute)}
+
+  /* ── верхняя строка ───────────────────── */
+  .topbar{border-bottom:1px solid var(--hair); background:var(--cream)}
+  .topbar .wrap{display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding-top:22px; padding-bottom:22px}
+  .sig{font:600 13px/1 Cormorant,Georgia,serif; text-transform:uppercase; letter-spacing:.26em; color:var(--ink)}
+  .tg{display:inline-flex; align-items:center; gap:10px; text-decoration:none; background:var(--green); color:#fff;
+      font:700 13px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em;
+      padding:14px 24px; border-radius:999px; transition:background .24s var(--ease)}
+  .tg:hover{background:var(--green-d)}
+  .tg span{display:inline-block; transition:transform .24s var(--ease)}
+  .tg:hover span{transform:translateX(5px)}
+
+  /* ── сетка ────────────────────────────── */
+  main{padding:56px 0 96px}
+  .sec-head{display:flex; align-items:baseline; gap:16px; margin-bottom:32px}
+  .sec-head .line{flex:1; height:1px; background:var(--hair)}
+  .grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(360px,1fr)); gap:40px 32px}
+
+  .card{
+    background:var(--card); border-radius:16px; overflow:hidden;
+    border:1px solid var(--hair);
+    display:flex; flex-direction:column;
+    transition:transform .24s var(--ease), box-shadow .24s var(--ease);
+    box-shadow:0 1px 2px rgba(19,36,27,.03);
+  }
+  .card:hover{transform:translateY(-3px); box-shadow:0 18px 40px -22px rgba(19,36,27,.35)}
+  .card .top{height:3px; background:var(--green)}
+  .thumb{position:relative; display:block; aspect-ratio:16/9; background:var(--band); overflow:hidden}
+  .thumb img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .42s var(--ease)}
+  .card:hover .thumb img{transform:scale(1.03)}
+  .thumb::after{content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(16,42,31,0) 45%,rgba(16,42,31,.55) 100%)}
+  .play{
+    position:absolute; z-index:2; left:50%; top:50%; transform:translate(-50%,-50%);
+    width:64px; height:64px; border-radius:999px; background:rgba(255,248,248,.92);
+    display:grid; place-items:center; transition:background .24s var(--ease), transform .24s var(--ease);
+  }
+  .card:hover .play{background:#fff; transform:translate(-50%,-50%) scale(1.06)}
+  .play i{display:block; width:0; height:0; margin-left:4px; border-left:17px solid var(--green-dd); border-top:11px solid transparent; border-bottom:11px solid transparent}
+  .num{position:absolute; z-index:2; left:14px; top:14px; font:500 12px/1 "JetBrains Mono",monospace; letter-spacing:.14em; color:var(--paper); background:rgba(16,42,31,.62); padding:7px 10px; border-radius:6px; backdrop-filter:blur(6px)}
+
+  .body{padding:22px 24px 26px; display:flex; flex-direction:column; flex:1; gap:12px}
+  .t{font:600 27px/1.12 Cormorant,Georgia,serif; letter-spacing:-.01em; color:var(--ink); margin:0}
+  .t em{font-style:italic; color:var(--green-dd)}
+  .sub{margin:0; font-size:15px; line-height:1.5; color:var(--ink-3)}
+  .btn{
+    margin-top:auto; align-self:flex-start; display:inline-flex; align-items:center; gap:10px;
+    background:var(--green); color:#fff; text-decoration:none;
+    font:700 13px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em;
+    padding:15px 26px; border-radius:999px;
+    transition:background .24s var(--ease);
+  }
+  .btn:hover{background:var(--green-d)}
+  .btn span{display:inline-block; transition:transform .24s var(--ease)}
+  .btn:hover span{transform:translateX(5px)}
+
+  /* ── подвал ───────────────────────────── */
+  footer{background:var(--band); border-top:1px solid var(--hair)}
+  footer .wrap{padding:44px 24px; display:flex; justify-content:space-between; align-items:center; gap:20px; flex-wrap:wrap}
+  .chan{display:inline-flex; align-items:center; gap:10px; text-decoration:none; color:var(--green-dd); font:700 13px/1 Manrope,sans-serif; text-transform:uppercase; letter-spacing:.14em; border:1px solid var(--green); padding:14px 24px; border-radius:999px; transition:background .24s var(--ease), color .24s var(--ease)}
+  .chan:hover{background:var(--green); color:#fff}
+
+  @media (max-width:640px){
+    body{font-size:17px}
+    main{padding:40px 0 72px}
+    .grid{grid-template-columns:1fr; gap:28px}
+    .t{font-size:24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none !important; transition:none !important}
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="sig">Т А Л И С М А Н</div>
+    <a class="tg" href="https://t.me/talismanmisha" target="_blank" rel="noopener">Telegram-канал <span>&#8594;</span></a>
+  </div>
+</div>
+
+<main>
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="over">Смотреть</div>
+      <div class="line"></div>
+    </div>
+
+    <div class="grid">
+
+      <article class="card">
+        <div class="top"></div>
+        <a class="thumb" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">
+          <img src="thumbs/01.jpg" alt="Как делать контент, который приводит покупателей, а не зрителей" loading="lazy">
+          <span class="num">01</span>
+          <span class="play"><i></i></span>
+        </a>
+        <div class="body">
+          <h2 class="t">Как делать контент, который приводит <em>покупателей</em>, а не зрителей</h2>
+          <p class="sub">Почему просмотры не равны деньгам и что менять в контенте, чтобы приходили те, кто платит.</p>
+          <a class="btn" href="https://youtu.be/w7i6O7z-pxM" target="_blank" rel="noopener">Смотреть <span>→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="top"></div>
+        <a class="thumb" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">
+          <img src="thumbs/02.jpg" alt="3млн на архивном контенте — контент-завод на Claude Code" loading="lazy">
+          <span class="num">02</span>
+          <span class="play"><i></i></span>
+        </a>
+        <div class="body">
+          <h2 class="t">3 млн на <em>архивном</em> контенте</h2>
+          <p class="sub">РАБОЧИЙ контент-завод на Claude Code для инфобизнеса: как старые записи превращаются в поток материалов.</p>
+          <a class="btn" href="https://youtu.be/t7Xn4d4eca8" target="_blank" rel="noopener">Смотреть <span>→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="top"></div>
+        <a class="thumb" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">
+          <img src="thumbs/03.jpg" alt="Модель инфобутика — 70 млн в год на онлайн-школе" loading="lazy">
+          <span class="num">03</span>
+          <span class="play"><i></i></span>
+        </a>
+        <div class="body">
+          <h2 class="t">Модель <em>инфобутика</em></h2>
+          <p class="sub">Как эксперту делать 70 млн в год на онлайн-школе: маленькая аудитория, высокая маржа, верные люди.</p>
+          <a class="btn" href="https://youtu.be/_fA30ZT0uWQ" target="_blank" rel="noopener">Смотреть <span>→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="top"></div>
+        <a class="thumb" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">
+          <img src="thumbs/04.jpg" alt="Нет никаких воронок, это всё враньё" loading="lazy">
+          <span class="num">04</span>
+          <span class="play"><i></i></span>
+        </a>
+        <div class="body">
+          <h2 class="t">Нет никаких <em>воронок</em>, это всё враньё</h2>
+          <p class="sub">Что стоит за красивыми схемами из курсов по маркетингу и что работает вместо них.</p>
+          <a class="btn" href="https://youtu.be/_MSDlOBOjds" target="_blank" rel="noopener">Смотреть <span>→</span></a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="top"></div>
+        <a class="thumb" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">
+          <img src="thumbs/05.jpg" alt="500к в месяц на наставничестве с микроблогом в 2026" loading="lazy">
+          <span class="num">05</span>
+          <span class="play"><i></i></span>
+        </a>
+        <div class="body">
+          <h2 class="t">500к/мес на наставничестве с <em>микроблогом</em></h2>
+          <p class="sub">Запуск менторства в 2026: сколько нужно подписчиков на самом деле и из чего складывается доход.</p>
+          <a class="btn" href="https://youtu.be/u7Wr0yraKas" target="_blank" rel="noopener">Смотреть <span>→</span></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">Т А Л И С М А Н</div>
+    <a class="chan" href="https://www.youtube.com/@talismanmishaa" target="_blank" rel="noopener">Канал на YouTube <span>→</span></a>
+  </div>
+</footer>
+
+</body>
+</html>
